@@ -1,0 +1,256 @@
+@{
+    ViewData["Title"] = "Our Projects";
+}
+
+<!-- LINK TO REQUIRED LIBRARIES -->
+<!-- Google Fonts for elegant typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+<!-- Bootstrap 5 (ensure this is in your _Layout.cshtml or linked here) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons for the arrow -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
+
+
+<style>
+    /* 
+    =============================================
+    =           STYLING & DESIGN                =
+    =============================================
+    For a real project, this CSS should be moved to its own .css file.
+    */
+
+    /* --- Base & Typography --- */
+    body {
+        /* This deep, dark navy blue creates a sophisticated and premium feel. */
+        background-color: #0D1B2A; 
+        color: #F0F0F0;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Serif font for headings adds a touch of classic elegance. */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+    }
+
+    /* --- Page Header Section --- */
+    .page-header {
+        padding: 6rem 0;
+        text-align: center;
+        border-bottom: 1px solid rgba(201, 164, 111, 0.2); /* Subtle gold divider */
+    }
+
+    .page-header h1 {
+        font-size: 4rem;
+        color: #FFFFFF;
+        margin-bottom: 0.5rem;
+    }
+
+    .page-header .subtitle {
+        font-size: 1.15rem;
+        color: #a7b4c2;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* --- Project List Section --- */
+    .project-section {
+        padding: 8rem 0; /* Generous vertical spacing is key to a luxury feel */
+    }
+
+    /* --- Project Card Styling --- */
+    .project-card {
+        margin-bottom: 8rem; /* Creates breathing room between projects */
+    }
+    .project-card:last-child {
+        margin-bottom: 2rem;
+    }
+
+    /* --- Image Container & Hover Effect --- */
+    .project-image-wrapper {
+        overflow: hidden; /* This is crucial for the zoom effect */
+        border-radius: 0.25rem;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); /* Deep shadow adds depth */
+        display: block; /* Make the <a> tag a block element */
+    }
+
+    .project-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Prevents image stretching */
+        transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth, elegant transition */
+    }
+
+    /* The "Ken Burns" subtle zoom effect on hover */
+    .project-card:hover .project-image-wrapper img {
+        transform: scale(1.05);
+    }
+    
+    /* --- Text Content Styling --- */
+    .project-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .project-category {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #C9A46F; /* Main Gold/Bronze accent color */
+        margin-bottom: 1rem;
+    }
+
+    .project-title {
+        font-size: 2.75rem;
+        color: #FFFFFF;
+        margin-bottom: 1.5rem;
+    }
+
+    .project-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #c5d3e2; /* Softer white for readability */
+        margin-bottom: 2rem;
+    }
+
+    /* --- Custom Link/Button Styling --- */
+    .btn-custom-link {
+        color: #C9A46F;
+        text-decoration: none;
+        font-weight: 500;
+        display: inline-block; /* Allows for padding and pseudo-elements */
+        position: relative;
+        padding-bottom: 5px;
+    }
+
+    .btn-custom-link i {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* The animated underline effect */
+    .btn-custom-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #C9A46F;
+        transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .btn-custom-link:hover {
+        color: #FFFFFF;
+    }
+    .btn-custom-link:hover i {
+        transform: translateX(5px); /* Slide icon on hover */
+    }
+    .btn-custom-link:hover::after {
+        width: 100%; /* "Grow" the underline on hover */
+    }
+
+    /* --- Responsive Adjustments for Mobile --- */
+    @media (max-width: 767.98px) {
+        .page-header { padding: 4rem 0; }
+        .page-header h1 { font-size: 2.5rem; }
+        .project-section { padding: 4rem 0; }
+        .project-card { margin-bottom: 5rem; }
+        .project-image-wrapper { margin-bottom: 2rem; }
+        .project-title { font-size: 2rem; }
+    }
+</style>
+
+<!-- ============================================= -->
+<!-- =               HTML STRUCTURE                -->
+<!-- ============================================= -->
+
+<header class="page-header">
+    <div class="container">
+        <h1>Our Creations</h1>
+        <p class="subtitle">A curated collection of our finest work, showcasing innovation, dedication, and an unparalleled commitment to excellence.</p>
+    </div>
+</header>
+
+<main class="project-section">
+    <div class="container">
+        <!-- PROJECT 1: Image Left, Text Right -->
+        <div class="project-card">
+            <div class="row g-5 align-items-center">
+                <!-- Image Column -->
+                <div class="col-md-7">
+                    <a href="#" class="project-image-wrapper">
+                         <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNTY3MHwwfDF8c2VhcmNofDR8fGJ1c2luZXNzJTIwbWVldGluZ3xlbnwwfHx8fDE2Mzc2OTg4MDU&ixlib=rb-1.2.1&q=80&w=800" alt="Project Aura" class="img-fluid">
+                    </a>
+                </div>
+                <!-- Content Column -->
+                <div class="col-md-5">
+                    <div class="project-content">
+                        <div class="project-category">Corporate Branding</div>
+                        <h2 class="project-title">Project Aura</h2>
+                        <p class="project-description">
+                            A complete brand identity overhaul for a leading tech firm, focusing on a futuristic and clean aesthetic to position them as innovators in the AI space.
+                        </p>
+                        <a href="#" class="btn-custom-link">
+                            View Project <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECT 2: Image Right, Text Left (Achieved with Bootstrap ordering classes) -->
+        <div class="project-card">
+            <div class="row g-5 align-items-center">
+                <!-- Image Column (Visually appears second on medium screens and up) -->
+                <div class="col-md-7 order-md-2">
+                    <a href="#" class="project-image-wrapper">
+                         <img src="https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNTY3MHwwfDF8c2VhcmNofDEzfHx3ZWIlMjBkZXNpZ258ZW58MHx8fHwxNjM3Njk4ODU0&ixlib=rb-1.2.1&q=80&w=800" alt="Artisan's Grove" class="img-fluid">
+                    </a>
+                </div>
+                <!-- Content Column (Visually appears first) -->
+                <div class="col-md-5 order-md-1">
+                    <div class="project-content">
+                        <div class="project-category">E-Commerce Platform</div>
+                        <h2 class="project-title">Artisan's Grove</h2>
+                        <p class="project-description">
+                           Developed a bespoke e-commerce solution for handcrafted goods, featuring a seamless user experience from discovery to checkout.
+                        </p>
+                        <a href="#" class="btn-custom-link">
+                            View Project <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PROJECT 3: Image Left, Text Right -->
+        <div class="project-card">
+            <div class="row g-5 align-items-center">
+                <!-- Image Column -->
+                <div class="col-md-7">
+                    <a href="#" class="project-image-wrapper">
+                         <img src="https://images.unsplash.com/photo-1607703756882-d010fc71186b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNTY3MHwwfDF8c2VhcmNofDF8fG1vYmlsZSUyMGFwcHxlbnwwfHx8fDE2Mzc2OTg5MDQ&ixlib=rb-1.2.1&q=80&w=800" alt="ConnectSphere" class="img-fluid">
+                    </a>
+                </div>
+                <!-- Content Column -->
+                <div class="col-md-5">
+                    <div class="project-content">
+                        <div class="project-category">Mobile Application</div>
+                        <h2 class="project-title">ConnectSphere</h2>
+                        <p class="project-description">
+                            Designed and launched a social networking app aimed at professionals, with a focus on intuitive navigation and meaningful connections.
+                        </p>
+                        <a href="#" class="btn-custom-link">
+                            View Project <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
