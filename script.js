@@ -1,9 +1,8 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
     // --- TYPING ANIMATION (Hero Section) ---
     const typingText = document.querySelector('.typing-text');
     const words = ["Digital Architect", "Creative Technologist", "UI/UX Strategist", "Front-End Specialist"];
-    // (The rest of the typing animation code is unchanged, so I'll omit it for brevity)
     let wordIndex = 0, charIndex = 0, isDeleting = false;
     function type() {
         const currentWord = words[wordIndex];
@@ -41,9 +40,8 @@
     faders.forEach(fader => appearOnScroll.observe(fader));
 
 
-    // --- NEW: HACKER TEXT SCRAMBLE ON HOVER (Project Titles) ---
+    // --- HACKER TEXT SCRAMBLE ON HOVER (Project Titles) ---
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!#%$@*<>?/";
-
     document.querySelectorAll('.card-title').forEach(title => {
         let interval = null;
         const originalText = title.dataset.text;
@@ -51,7 +49,6 @@
         title.onmouseover = event => {
             let iteration = 0;
             clearInterval(interval);
-
             interval = setInterval(() => {
                 event.target.innerText = originalText
                     .split("")
@@ -62,18 +59,43 @@
                         return letters[Math.floor(Math.random() * letters.length)];
                     })
                     .join("");
-
                 if (iteration >= originalText.length) {
                     clearInterval(interval);
                 }
-
                 iteration += 1 / 3;
             }, 30);
         }
-
         title.onmouseout = () => {
             clearInterval(interval);
             title.innerText = originalText;
         }
     });
+
+    // --- EVENT GALLERY LIGHTBOX ---
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    if (lightbox) { // Check if lightbox exists to prevent errors
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('active');
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+        };
+
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
 });
